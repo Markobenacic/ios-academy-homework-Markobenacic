@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DMs-Bj-Lmw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aML-Fw-jtO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="11V-pV-uzN">
             <objects>
-                <viewController id="DMs-Bj-Lmw" customClass="LoginViewController" customModule="TV_shows" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="DMs-Bj-Lmw" customClass="LoginViewController" customModule="TV_shows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CiM-AH-no4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,6 +77,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginButtonActionHandler:" destination="DMs-Bj-Lmw" eventType="touchUpInside" id="9ol-ld-zYe"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvz-eF-Yl8">
                                 <rect key="frame" x="20" y="552" width="374" height="46"/>
@@ -87,6 +90,9 @@
                                 <state key="normal" title="Register">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="registerButtonActionHandler:" destination="DMs-Bj-Lmw" eventType="touchUpInside" id="YJU-hZ-kD5"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J6U-sa-zEb">
                                 <rect key="frame" x="20" y="368.5" width="374" height="1"/>
@@ -138,6 +144,7 @@
                             <constraint firstItem="QQ2-n2-ydA" firstAttribute="leading" secondItem="dSY-Xf-bhc" secondAttribute="leading" constant="20" id="x8t-ig-HZ0"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="2GL-6o-Quc"/>
                     <connections>
                         <outlet property="checkBoxButton" destination="PAw-Zq-jIZ" id="NzR-5c-Fvg"/>
                         <outlet property="emailTextField" destination="kmL-MV-p8p" id="77s-ad-l4R"/>
@@ -147,6 +154,24 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jke-r9-D43" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="492.75362318840581" y="-624.10714285714278"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rWY-5Y-ojg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aML-Fw-jtO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nZq-J4-tzc">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DMs-Bj-Lmw" kind="relationship" relationship="rootViewController" id="K4k-KW-VJH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mZw-MQ-5Km" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-417.39130434782612" y="-624.10714285714278"/>
         </scene>

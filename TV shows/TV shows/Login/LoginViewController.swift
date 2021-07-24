@@ -32,9 +32,29 @@ class LoginViewController : UIViewController{
     
     //MARK: - Actions
     
+    @IBAction func loginButtonActionHandler(_ sender: Any) {
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Home", bundle: bundle)
+        let homeViewController = storyboard.instantiateViewController(
+            withIdentifier: "HomeViewController"
+        )
+        
+        navigationController?.pushViewController(homeViewController, animated: true)
+    }
+    
+    @IBAction func registerButtonActionHandler(_ sender: Any) {
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Home", bundle: bundle)
+        let homeViewController = storyboard.instantiateViewController(
+            withIdentifier: "HomeViewController"
+        )
+        
+        navigationController?.pushViewController(homeViewController, animated: true)
+    }
+    
     //MARK: - class methods
     
-    private func setupUI(){
+    private func setupUI() {
         setupVisibilityButton()
         setupEmailAndPasswordTextField()
         setupCheckBoxButton()
@@ -46,7 +66,7 @@ class LoginViewController : UIViewController{
 //MARK: - private UI setup
 private extension LoginViewController{
     
-    private func setupLoginAndRegisterButtons(){
+    private func setupLoginAndRegisterButtons() {
         loginButton.layer.cornerRadius = 15.0
         
         loginButton.isEnabled = false
@@ -54,43 +74,53 @@ private extension LoginViewController{
         
         loginButton.backgroundColor = #colorLiteral(red: 0.4808383741, green: 0.4189229082, blue: 0.6904364692, alpha: 1)
         
-        loginButton.setTitleColor(#colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1), for: UIControl.State.normal)
-        loginButton.setTitleColor(.lightGray, for: UIControl.State.disabled)
+        loginButton.setTitleColor(#colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1), for: .normal)
+        loginButton.setTitleColor(.lightGray, for: .disabled)
         
-        registerButton.setTitleColor(.lightGray, for: UIControl.State.disabled)
-        registerButton.setTitleColor(.white, for: UIControl.State.normal)
-        
+        registerButton.setTitleColor(.lightGray, for: .disabled)
+        registerButton.setTitleColor(.white, for: .normal)
+                
     }
     
-    private func setupEmailAndPasswordTextField(){
+    private func setupEmailAndPasswordTextField() {
         passwordTextField.isSecureTextEntry = true
         
-        emailTextField.attributedPlaceholder = NSAttributedString(string: "Email",
-                                                                  attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
-                                                                     attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        emailTextField.textColor = UIColor.white
-        passwordTextField.textColor = UIColor.white
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string:"Email",
+            attributes: [NSAttributedString.Key.foregroundColor :UIColor.lightGray])
+        
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        
+        emailTextField.textColor = .white
+        passwordTextField.textColor = .white
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
     }
     
     
-    private func setupCheckBoxButton(){
+    private func setupCheckBoxButton() {
         
-        checkBoxButton.setImage(UIImage(named: "ic-checkbox-unselected"), for: UIControl.State.normal)
+        checkBoxButton.setImage(UIImage(named: "ic-checkbox-unselected"), for: .normal)
         
-        checkBoxButton.addTarget(self,
-                                 action: #selector(checkBoxButtonActionHandler(_:)),
-                                 for: UIControl.Event.touchUpInside)
+        checkBoxButton.setImage(UIImage(named: "ic-checkbox-selected"), for: .selected)
+        
+        checkBoxButton.addTarget(
+            self,
+            action: #selector(checkBoxButtonActionHandler(_:)),
+            for: .touchUpInside)
     }
     
-    private func setupVisibilityButton(){
+    private func setupVisibilityButton() {
         
         let passwordVisibilityButton = UIButton(type: .custom)
         
         passwordVisibilityButton.setImage(UIImage(named: "Visibility-icon-closed"), for: .normal)
+        
+        passwordVisibilityButton.setImage(UIImage(named: "Visibility-icon"), for: .selected)
+        
         passwordVisibilityButton.tintColor = .white
         
         passwordVisibilityButton.addTarget(
@@ -107,34 +137,21 @@ private extension LoginViewController{
 
 //MARK: - Private action handlers
 
-private extension LoginViewController{
+private extension LoginViewController {
     
     @objc
-    private func checkBoxButtonActionHandler(_ sender: Any){
-        let checkBoxButton = sender as! UIButton
-        
-        if isCheckBoxChecked{
-            isCheckBoxChecked = false
-            checkBoxButton.setImage(UIImage(named: "ic-checkbox-unselected"), for: UIControl.State.normal)
-        }else{
-            isCheckBoxChecked = true
-            checkBoxButton.setImage(UIImage(named: "ic-checkbox-selected"), for: UIControl.State.normal)
-        }
+    func checkBoxButtonActionHandler(_ sender: UIButton) {
+        sender.isSelected.toggle()
     }
     
     @objc
-    func passwordVisibilityButtonActionHandler(_ sender: Any){
-        let visibilityButton = sender as! UIButton
-        visibilityButton.isSelected = !visibilityButton.isSelected
+    func passwordVisibilityButtonActionHandler(_ sender: UIButton) {
+        sender.isSelected.toggle()
         
-        if(visibilityButton.isSelected){
+        if sender.isSelected {
             passwordTextField.isSecureTextEntry = false
-            visibilityButton.setImage(UIImage(named: "Visibility-icon"), for: .normal)
-            
-        }else{
+        } else {
             passwordTextField.isSecureTextEntry = true
-            visibilityButton.setImage(UIImage(named: "Visibility-icon-closed"), for: .normal)
-            
         }
     }
 }
@@ -142,12 +159,12 @@ private extension LoginViewController{
 //MARK: - Delegates
 
 extension LoginViewController: UITextFieldDelegate{
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if(emailTextField.hasText && passwordTextField.hasText){
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if(emailTextField.hasText && passwordTextField.hasText) {
             loginButton.backgroundColor = .white
             loginButton.isEnabled = true
             registerButton.isEnabled = true
-        }else{
+        } else {
             loginButton.backgroundColor = #colorLiteral(red: 0.4808383741, green: 0.4189229082, blue: 0.6904364692, alpha: 1)
             loginButton.isEnabled = false
             registerButton.isEnabled = false
