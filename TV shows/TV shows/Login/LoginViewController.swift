@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
+import Alamofire
 
 class LoginViewController : UIViewController{
     
@@ -22,6 +24,8 @@ class LoginViewController : UIViewController{
     
     private var passwordVisibilityButton: UIButton?
     private var isCheckBoxChecked: Bool = false
+    private var userResponse: UserResponse?
+    
     
     //MARK: - Lifecycle methods
     
@@ -33,23 +37,14 @@ class LoginViewController : UIViewController{
     //MARK: - Actions
     
     @IBAction func loginButtonActionHandler(_ sender: Any) {
-        let bundle = Bundle.main
-        let storyboard = UIStoryboard(name: "Home", bundle: bundle)
-        let homeViewController = storyboard.instantiateViewController(
-            withIdentifier: "HomeViewController"
-        )
-        
-        navigationController?.pushViewController(homeViewController, animated: true)
+        // login also can't be pressed unless there is some text in email and password, so I'm force unwrapping. (Not sure if it's the right thing to do..)
+        loginUser(email: emailTextField.text!, password: passwordTextField.text!)
     }
     
     @IBAction func registerButtonActionHandler(_ sender: Any) {
-        let bundle = Bundle.main
-        let storyboard = UIStoryboard(name: "Home", bundle: bundle)
-        let homeViewController = storyboard.instantiateViewController(
-            withIdentifier: "HomeViewController"
-        )
         
-        navigationController?.pushViewController(homeViewController, animated: true)
+        // register can't be pressed unless there is some text in email and password, so I'm force unwrapping. (Not sure if it's the right thing to do..)
+        registerUser(email: emailTextField.text!, password: passwordTextField.text!)
     }
     
     //MARK: - class methods
@@ -61,10 +56,96 @@ class LoginViewController : UIViewController{
         setupLoginAndRegisterButtons()
     }
     
+    private func pushHomeView() {
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Home", bundle: bundle)
+        let homeViewController = storyboard.instantiateViewController(
+            withIdentifier: "HomeViewController"
+        )
+        navigationController?.pushViewController(homeViewController, animated: true)
+    }
+}
+
+//MARK: - Login and register network calls
+
+private extension LoginViewController {
+    
+    func loginUser(email: String, password: String) {
+        SVProgressHUD.show()
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        
+        let url = Constants.Networking.baseURL + "/users/sign_in"
+        
+        AF
+            .request(
+                url,
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { [weak self] response in
+                switch response.result {
+                case .success(let userResponse):
+                    SVProgressHUD.dismiss()
+                    self?.userResponse = userResponse
+                    print("Sign in successful")
+                    
+                    //jel ovo safe ovako pisati?
+                    self?.pushHomeView()
+                case .failure(let error):
+                    SVProgressHUD.showError(withStatus: "Sign in error")
+                    print(error)
+                }
+            }
+    }
+    
+    func registerUser(email: String, password: String) {
+        SVProgressHUD.show()
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password,
+            "password_confirmation": password
+        ]
+        
+        let url = Constants.Networking.baseURL + "/users"
+        AF
+            .request(
+                url,
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { [weak self] response in
+                switch response.result {
+                case .success(let userResponse):
+                    SVProgressHUD.dismiss()
+                    self?.userResponse = userResponse
+                    print("Registration successful")
+                   
+                    self?.parseHeaders(headersDict: response.response?.headers.dictionary)
+                    
+                    //jel ovo safe ovako pisati?
+                    self?.pushHomeView()
+                case .failure(let error):
+                    SVProgressHUD.showError(withStatus: "Register error")
+                    print(error)
+                }
+            }
+    }
+    func parseHeaders(headersDict: [String : String]?){
+        //
+    }
 }
 
 //MARK: - private UI setup
-private extension LoginViewController{
+private extension LoginViewController {
     
     private func setupLoginAndRegisterButtons() {
         loginButton.layer.cornerRadius = 15.0
@@ -99,7 +180,6 @@ private extension LoginViewController{
         emailTextField.delegate = self
         passwordTextField.delegate = self
     }
-    
     
     private func setupCheckBoxButton() {
         
@@ -158,9 +238,9 @@ private extension LoginViewController {
 
 //MARK: - Delegates
 
-extension LoginViewController: UITextFieldDelegate{
+extension LoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if(emailTextField.hasText && passwordTextField.hasText) {
+        if (emailTextField.hasText && passwordTextField.hasText) {
             loginButton.backgroundColor = .white
             loginButton.isEnabled = true
             registerButton.isEnabled = true
