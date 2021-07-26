@@ -45,7 +45,7 @@ class LoginViewController : UIViewController{
             print("email or password field is empty")
             return
         }
-        loginUser(email: emailTextField.text!, password: passwordTextField.text!)
+        loginUser(email: email, password: password)
     }
     
     @IBAction func registerButtonActionHandler(_ sender: Any) {
@@ -58,7 +58,7 @@ class LoginViewController : UIViewController{
             print("email or password field is empty")
             return
         }
-        registerUser(email: emailTextField.text!, password: passwordTextField.text!)
+        registerUser(email: email, password: password)
     }
     
     // MARK: - class methods
