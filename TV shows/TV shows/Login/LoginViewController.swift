@@ -25,6 +25,7 @@ class LoginViewController : UIViewController{
     private var passwordVisibilityButton: UIButton?
     private var isCheckBoxChecked: Bool = false
     private var userResponse: UserResponse?
+    private var authInfo: AuthInfo?
     
     // MARK: - Lifecycle methods
     
@@ -75,7 +76,10 @@ class LoginViewController : UIViewController{
         let storyboard = UIStoryboard(name: "Home", bundle: bundle)
         let homeViewController = storyboard.instantiateViewController(
             withIdentifier: "HomeViewController"
-        )
+        ) as! HomeViewController
+        homeViewController.authInfo = authInfo
+        homeViewController.userResponse = userResponse
+        
         navigationController?.pushViewController(homeViewController, animated: true)
     }
 }
@@ -108,11 +112,15 @@ private extension LoginViewController {
                 switch response.result {
                 case .success(let userResponse):
                     SVProgressHUD.dismiss()
+                    let headers = response.response?.headers.dictionary ?? [:]
                     self.userResponse = userResponse
+                    self.handleSuccessfulLoginOrRegister(for: userResponse.user, headers: headers)
                     print("Sign in successful")
-                    self.pushHomeView()
                 case .failure(let error):
-                    SVProgressHUD.showError(withStatus: "Sign in error")
+                    
+                    // Should I put "invalid email or password" message here? Should I include cases for both serverside errors and invalid credentials? If invalid credentials are presented by 401 response, how is "can't access the server" presented?
+                    self.showAlertOfError(withStatus: "Login error", withMessage: "Oops, something went wrong")
+                    SVProgressHUD.dismiss()
                     print(error)
                 }
             }
@@ -142,18 +150,35 @@ private extension LoginViewController {
                 switch response.result {
                 case .success(let userResponse):
                     SVProgressHUD.dismiss()
+                    let headers = response.response?.headers.dictionary ?? [:]
                     self.userResponse = userResponse
+                    self.handleSuccessfulLoginOrRegister(for: userResponse.user, headers: headers)
                     print("Registration successful")
-                    self.parseHeaders(headersDict: response.response?.headers.dictionary)
-                    self.pushHomeView()
                 case .failure(let error):
-                    SVProgressHUD.showError(withStatus: "Register error")
+                    self.showAlertOfError(withStatus: "Registration error", withMessage: "Oops, something went wrong")
+                    SVProgressHUD.dismiss()
                     print(error)
                 }
             }
     }
-    func parseHeaders(headersDict: [String : String]?){
-        //
+    
+    func showAlertOfError(withStatus: String, withMessage: String) {
+        let alertController = UIAlertController(
+            title: withStatus,
+            message: withMessage,
+            preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "Ok", style: .cancel) { action in }
+        alertController.addAction(actionOk)
+        self.present(alertController, animated: true) { }
+    }
+    
+    func handleSuccessfulLoginOrRegister(for user: User, headers: [String: String]) {
+        guard let authInfo = try? AuthInfo(headers: headers) else {
+            SVProgressHUD.showError(withStatus: "Missing headers")
+            return
+        }
+        self.authInfo = authInfo
+        self.pushHomeView()
     }
 }
 
@@ -195,9 +220,7 @@ private extension LoginViewController {
     }
     
     private func setupCheckBoxButton() {
-        
         checkBoxButton.setImage(UIImage(named: "ic-checkbox-unselected"), for: .normal)
-        
         checkBoxButton.setImage(UIImage(named: "ic-checkbox-selected"), for: .selected)
         
         checkBoxButton.addTarget(
@@ -211,9 +234,7 @@ private extension LoginViewController {
         let passwordVisibilityButton = UIButton(type: .custom)
         
         passwordVisibilityButton.setImage(UIImage(named: "Visibility-icon-closed"), for: .normal)
-        
         passwordVisibilityButton.setImage(UIImage(named: "Visibility-icon"), for: .selected)
-        
         passwordVisibilityButton.tintColor = .white
         
         passwordVisibilityButton.addTarget(
