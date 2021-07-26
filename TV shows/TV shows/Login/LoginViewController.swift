@@ -20,34 +20,48 @@ class LoginViewController : UIViewController{
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
     
-    //MARK: - Properties
+    // MARK: - Properties
     
     private var passwordVisibilityButton: UIButton?
     private var isCheckBoxChecked: Bool = false
     private var userResponse: UserResponse?
     
-    
-    //MARK: - Lifecycle methods
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
-    //MARK: - Actions
+    // MARK: - Actions
     
     @IBAction func loginButtonActionHandler(_ sender: Any) {
-        // login also can't be pressed unless there is some text in email and password, so I'm force unwrapping. (Not sure if it's the right thing to do..)
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+        else {
+            print("email or password field is empty")
+            return
+        }
         loginUser(email: emailTextField.text!, password: passwordTextField.text!)
     }
     
     @IBAction func registerButtonActionHandler(_ sender: Any) {
-        
-        // register can't be pressed unless there is some text in email and password, so I'm force unwrapping. (Not sure if it's the right thing to do..)
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+        else {
+            print("email or password field is empty")
+            return
+        }
         registerUser(email: emailTextField.text!, password: passwordTextField.text!)
     }
     
-    //MARK: - class methods
+    // MARK: - class methods
     
     private func setupUI() {
         setupVisibilityButton()
@@ -66,7 +80,7 @@ class LoginViewController : UIViewController{
     }
 }
 
-//MARK: - Login and register network calls
+// MARK: - Login and register network calls
 
 private extension LoginViewController {
     
@@ -89,14 +103,14 @@ private extension LoginViewController {
             )
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] response in
+                guard let self = self else { return }
+                
                 switch response.result {
                 case .success(let userResponse):
                     SVProgressHUD.dismiss()
-                    self?.userResponse = userResponse
+                    self.userResponse = userResponse
                     print("Sign in successful")
-                    
-                    //jel ovo safe ovako pisati?
-                    self?.pushHomeView()
+                    self.pushHomeView()
                 case .failure(let error):
                     SVProgressHUD.showError(withStatus: "Sign in error")
                     print(error)
@@ -123,16 +137,15 @@ private extension LoginViewController {
             )
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] response in
+                guard let self = self else { return }
+                
                 switch response.result {
                 case .success(let userResponse):
                     SVProgressHUD.dismiss()
-                    self?.userResponse = userResponse
+                    self.userResponse = userResponse
                     print("Registration successful")
-                   
-                    self?.parseHeaders(headersDict: response.response?.headers.dictionary)
-                    
-                    //jel ovo safe ovako pisati?
-                    self?.pushHomeView()
+                    self.parseHeaders(headersDict: response.response?.headers.dictionary)
+                    self.pushHomeView()
                 case .failure(let error):
                     SVProgressHUD.showError(withStatus: "Register error")
                     print(error)
@@ -144,7 +157,7 @@ private extension LoginViewController {
     }
 }
 
-//MARK: - private UI setup
+// MARK: - private UI setup
 private extension LoginViewController {
     
     private func setupLoginAndRegisterButtons() {
@@ -215,7 +228,7 @@ private extension LoginViewController {
     }
 }
 
-//MARK: - Private action handlers
+// MARK: - Private action handlers
 
 private extension LoginViewController {
     
@@ -236,7 +249,7 @@ private extension LoginViewController {
     }
 }
 
-//MARK: - Delegates
+// MARK: - Delegates
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
