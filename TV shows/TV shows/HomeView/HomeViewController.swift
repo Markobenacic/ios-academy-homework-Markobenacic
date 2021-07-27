@@ -21,16 +21,14 @@ class HomeViewController: UIViewController {
     var userResponse: UserResponse?
     private var showsResponse: ShowsResponse?
     
-    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setViewControllers([self], animated: true)
         fetchShows()
         setupUI()
     }
-    
-    //MARK: - Actions
     
     //MARK: - Class methods
     
@@ -66,8 +64,8 @@ private extension HomeViewController {
                 case .success(let showsResponse):
                     SVProgressHUD.dismiss()
                     print(showsResponse.shows.count)
-                    // ???? referenca na showsResponse se izgubi!??!
                     self.showsResponse = showsResponse
+                    self.showsTableView.reloadData()
                     print("fetching shows successful")
                 case .failure(let error):
                     print(error)
@@ -96,7 +94,7 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // is it okay to return 0 here if showsResponse is nil s
+        // is it okay to return 0 here if showsResponse is nil
         guard let showsResponse = showsResponse else { return 0 }
         return showsResponse.shows.count
     }
@@ -106,9 +104,13 @@ extension HomeViewController: UITableViewDataSource {
         let cell = showsTableView.dequeueReusableCell(
             withIdentifier: String(describing: TVShowsTableViewCell.self),
             for: indexPath
-        )
-        return cell
+        ) as! TVShowsTableViewCell
         
+        // is it good practice to unpack showsResponse every time I use it in various methods?
+        guard let showsResponse = showsResponse else { return cell }
+        cell.configure(with: showsResponse.shows[indexPath.row])
+        
+        return cell
     }
     
     
