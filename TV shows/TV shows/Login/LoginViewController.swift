@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
+import Alamofire
 
 class LoginViewController : UIViewController{
     
@@ -18,35 +20,147 @@ class LoginViewController : UIViewController{
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
     
-    //MARK: - Properties
+    // MARK: - Properties
     
     private var passwordVisibilityButton: UIButton?
     private var isCheckBoxChecked: Bool = false
+    private var userResponse: UserResponse?
     
-    //MARK: - Lifecycle methods
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
-    //MARK: - Actions
+    // MARK: - Actions
     
-    //MARK: - class methods
+    @IBAction func loginButtonActionHandler(_ sender: Any) {
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+        else {
+            print("email or password field is empty")
+            return
+        }
+        loginUser(email: email, password: password)
+    }
     
-    private func setupUI(){
+    @IBAction func registerButtonActionHandler(_ sender: Any) {
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+        else {
+            print("email or password field is empty")
+            return
+        }
+        registerUser(email: email, password: password)
+    }
+    
+    // MARK: - class methods
+    
+    private func setupUI() {
         setupVisibilityButton()
         setupEmailAndPasswordTextField()
         setupCheckBoxButton()
         setupLoginAndRegisterButtons()
     }
     
+    private func pushHomeView() {
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Home", bundle: bundle)
+        let homeViewController = storyboard.instantiateViewController(
+            withIdentifier: "HomeViewController"
+        )
+        navigationController?.pushViewController(homeViewController, animated: true)
+    }
 }
 
-//MARK: - private UI setup
-private extension LoginViewController{
+// MARK: - Login and register network calls
+
+private extension LoginViewController {
     
-    private func setupLoginAndRegisterButtons(){
+    func loginUser(email: String, password: String) {
+        SVProgressHUD.show()
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        
+        let url = Constants.Networking.baseURL + "/users/sign_in"
+        
+        AF
+            .request(
+                url,
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { [weak self] response in
+                guard let self = self else { return }
+                
+                switch response.result {
+                case .success(let userResponse):
+                    SVProgressHUD.dismiss()
+                    self.userResponse = userResponse
+                    print("Sign in successful")
+                    self.pushHomeView()
+                case .failure(let error):
+                    SVProgressHUD.showError(withStatus: "Sign in error")
+                    print(error)
+                }
+            }
+    }
+    
+    func registerUser(email: String, password: String) {
+        SVProgressHUD.show()
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password,
+            "password_confirmation": password
+        ]
+        
+        let url = Constants.Networking.baseURL + "/users"
+        AF
+            .request(
+                url,
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { [weak self] response in
+                guard let self = self else { return }
+                
+                switch response.result {
+                case .success(let userResponse):
+                    SVProgressHUD.dismiss()
+                    self.userResponse = userResponse
+                    print("Registration successful")
+                    self.parseHeaders(headersDict: response.response?.headers.dictionary)
+                    self.pushHomeView()
+                case .failure(let error):
+                    SVProgressHUD.showError(withStatus: "Register error")
+                    print(error)
+                }
+            }
+    }
+    func parseHeaders(headersDict: [String : String]?){
+        //
+    }
+}
+
+// MARK: - private UI setup
+private extension LoginViewController {
+    
+    private func setupLoginAndRegisterButtons() {
         loginButton.layer.cornerRadius = 15.0
         
         loginButton.isEnabled = false
@@ -54,43 +168,52 @@ private extension LoginViewController{
         
         loginButton.backgroundColor = #colorLiteral(red: 0.4808383741, green: 0.4189229082, blue: 0.6904364692, alpha: 1)
         
-        loginButton.setTitleColor(#colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1), for: UIControl.State.normal)
-        loginButton.setTitleColor(.lightGray, for: UIControl.State.disabled)
+        loginButton.setTitleColor(#colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1), for: .normal)
+        loginButton.setTitleColor(.lightGray, for: .disabled)
         
-        registerButton.setTitleColor(.lightGray, for: UIControl.State.disabled)
-        registerButton.setTitleColor(.white, for: UIControl.State.normal)
-        
+        registerButton.setTitleColor(.lightGray, for: .disabled)
+        registerButton.setTitleColor(.white, for: .normal)
+                
     }
     
-    private func setupEmailAndPasswordTextField(){
+    private func setupEmailAndPasswordTextField() {
         passwordTextField.isSecureTextEntry = true
         
-        emailTextField.attributedPlaceholder = NSAttributedString(string: "Email",
-                                                                  attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
-                                                                     attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        emailTextField.textColor = UIColor.white
-        passwordTextField.textColor = UIColor.white
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string:"Email",
+            attributes: [NSAttributedString.Key.foregroundColor :UIColor.lightGray])
+        
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        
+        emailTextField.textColor = .white
+        passwordTextField.textColor = .white
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
     }
     
-    
-    private func setupCheckBoxButton(){
+    private func setupCheckBoxButton() {
         
-        checkBoxButton.setImage(UIImage(named: "ic-checkbox-unselected"), for: UIControl.State.normal)
+        checkBoxButton.setImage(UIImage(named: "ic-checkbox-unselected"), for: .normal)
         
-        checkBoxButton.addTarget(self,
-                                 action: #selector(checkBoxButtonActionHandler(_:)),
-                                 for: UIControl.Event.touchUpInside)
+        checkBoxButton.setImage(UIImage(named: "ic-checkbox-selected"), for: .selected)
+        
+        checkBoxButton.addTarget(
+            self,
+            action: #selector(checkBoxButtonActionHandler(_:)),
+            for: .touchUpInside)
     }
     
-    private func setupVisibilityButton(){
+    private func setupVisibilityButton() {
         
         let passwordVisibilityButton = UIButton(type: .custom)
         
         passwordVisibilityButton.setImage(UIImage(named: "Visibility-icon-closed"), for: .normal)
+        
+        passwordVisibilityButton.setImage(UIImage(named: "Visibility-icon"), for: .selected)
+        
         passwordVisibilityButton.tintColor = .white
         
         passwordVisibilityButton.addTarget(
@@ -105,49 +228,36 @@ private extension LoginViewController{
     }
 }
 
-//MARK: - Private action handlers
+// MARK: - Private action handlers
 
-private extension LoginViewController{
+private extension LoginViewController {
     
     @objc
-    private func checkBoxButtonActionHandler(_ sender: Any){
-        let checkBoxButton = sender as! UIButton
-        
-        if isCheckBoxChecked{
-            isCheckBoxChecked = false
-            checkBoxButton.setImage(UIImage(named: "ic-checkbox-unselected"), for: UIControl.State.normal)
-        }else{
-            isCheckBoxChecked = true
-            checkBoxButton.setImage(UIImage(named: "ic-checkbox-selected"), for: UIControl.State.normal)
-        }
+    func checkBoxButtonActionHandler(_ sender: UIButton) {
+        sender.isSelected.toggle()
     }
     
     @objc
-    func passwordVisibilityButtonActionHandler(_ sender: Any){
-        let visibilityButton = sender as! UIButton
-        visibilityButton.isSelected = !visibilityButton.isSelected
+    func passwordVisibilityButtonActionHandler(_ sender: UIButton) {
+        sender.isSelected.toggle()
         
-        if(visibilityButton.isSelected){
+        if sender.isSelected {
             passwordTextField.isSecureTextEntry = false
-            visibilityButton.setImage(UIImage(named: "Visibility-icon"), for: .normal)
-            
-        }else{
+        } else {
             passwordTextField.isSecureTextEntry = true
-            visibilityButton.setImage(UIImage(named: "Visibility-icon-closed"), for: .normal)
-            
         }
     }
 }
 
-//MARK: - Delegates
+// MARK: - Delegates
 
-extension LoginViewController: UITextFieldDelegate{
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if(emailTextField.hasText && passwordTextField.hasText){
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if (emailTextField.hasText && passwordTextField.hasText) {
             loginButton.backgroundColor = .white
             loginButton.isEnabled = true
             registerButton.isEnabled = true
-        }else{
+        } else {
             loginButton.backgroundColor = #colorLiteral(red: 0.4808383741, green: 0.4189229082, blue: 0.6904364692, alpha: 1)
             loginButton.isEnabled = false
             registerButton.isEnabled = false
