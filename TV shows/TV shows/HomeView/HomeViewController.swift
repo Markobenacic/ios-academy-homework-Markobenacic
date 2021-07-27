@@ -66,7 +66,6 @@ private extension HomeViewController {
                 case .success(let showsResponse):
                     SVProgressHUD.dismiss()
                     print(showsResponse.shows.count)
-                    
                     // ???? referenca na showsResponse se izgubi!??!
                     self.showsResponse = showsResponse
                     print("fetching shows successful")
