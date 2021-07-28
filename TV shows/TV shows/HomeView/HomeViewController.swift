@@ -81,6 +81,7 @@ private extension HomeViewController {
     
     func setupShowsTableView() {
         showsTableView.dataSource = self
+        showsTableView.delegate = self
     }
 }
 
@@ -112,6 +113,25 @@ extension HomeViewController: UITableViewDataSource {
         
         return cell
     }
+}
+
+// MARK: - Shows TableView delegates
+
+extension HomeViewController: UITableViewDelegate {
     
-    
+    // Pushes ShowsDetailsView with details about pressed show
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "ShowDetails", bundle: bundle)
+        let showDetailsViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: ShowDetailsViewController.self)
+        ) as! ShowDetailsViewController
+        
+        showDetailsViewController.authInfo = authInfo
+        showDetailsViewController.showID = showsResponse?.shows[indexPath.row].id
+        showDetailsViewController.show = showsResponse?.shows[indexPath.row]
+        
+        navigationController?.pushViewController(showDetailsViewController, animated: true)
+    }
 }

@@ -11,6 +11,10 @@
 		42333E5A26A3F61E00030DAB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42333E5926A3F61E00030DAB /* LoginViewController.swift */; };
 		4245568326AF79CA001AF908 /* Shows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245568226AF79CA001AF908 /* Shows.swift */; };
 		4245568726AFAF98001AF908 /* TVShowsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245568626AFAF98001AF908 /* TVShowsTableViewCell.swift */; };
+		4245568B26B0DBE7001AF908 /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245568A26B0DBE7001AF908 /* ShowDetailsViewController.swift */; };
+		4245568D26B0E61F001AF908 /* ShowDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4245568C26B0E61F001AF908 /* ShowDetails.storyboard */; };
+		4245568F26B0F9CF001AF908 /* MainShowDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245568E26B0F9CF001AF908 /* MainShowDataCell.swift */; };
+		4245569126B100DF001AF908 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245569026B100DF001AF908 /* CommentCell.swift */; };
 		4288F27326AA4AD100E7DF1C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4288F27226AA4AD100E7DF1C /* Home.storyboard */; };
 		4288F27526AA4B1000E7DF1C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4288F27426AA4B1000E7DF1C /* HomeViewController.swift */; };
 		4288F27826ACD15800E7DF1C /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4288F27726ACD15800E7DF1C /* Users.swift */; };
@@ -26,6 +30,10 @@
 		42333E5926A3F61E00030DAB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4245568226AF79CA001AF908 /* Shows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shows.swift; sourceTree = "<group>"; };
 		4245568626AFAF98001AF908 /* TVShowsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsTableViewCell.swift; sourceTree = "<group>"; };
+		4245568A26B0DBE7001AF908 /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
+		4245568C26B0E61F001AF908 /* ShowDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowDetails.storyboard; sourceTree = "<group>"; };
+		4245568E26B0F9CF001AF908 /* MainShowDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShowDataCell.swift; sourceTree = "<group>"; };
+		4245569026B100DF001AF908 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		4288F27226AA4AD100E7DF1C /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		4288F27426AA4B1000E7DF1C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4288F27726ACD15800E7DF1C /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
@@ -59,6 +67,24 @@
 				42333E5926A3F61E00030DAB /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		4245568826B0D7B8001AF908 /* Shows details */ = {
+			isa = PBXGroup;
+			children = (
+				4245568A26B0DBE7001AF908 /* ShowDetailsViewController.swift */,
+				4245568C26B0E61F001AF908 /* ShowDetails.storyboard */,
+				4245568E26B0F9CF001AF908 /* MainShowDataCell.swift */,
+				4245569026B100DF001AF908 /* CommentCell.swift */,
+			);
+			path = "Shows details";
+			sourceTree = "<group>";
+		};
+		4245568926B0D890001AF908 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Review;
 			sourceTree = "<group>";
 		};
 		4288F27126AA4AB300E7DF1C /* HomeView */ = {
@@ -101,6 +127,8 @@
 		429B4A6926975F3F002C3B97 /* TV shows */ = {
 			isa = PBXGroup;
 			children = (
+				4245568926B0D890001AF908 /* Review */,
+				4245568826B0D7B8001AF908 /* Shows details */,
 				4288F27626ACD13C00E7DF1C /* Networking */,
 				4288F27126AA4AB300E7DF1C /* HomeView */,
 				42333E4E26A24EE300030DAB /* Login */,
@@ -192,6 +220,7 @@
 				429B4A7726975F41002C3B97 /* LaunchScreen.storyboard in Resources */,
 				429B4A7426975F41002C3B97 /* Assets.xcassets in Resources */,
 				42333E5726A3F35500030DAB /* Login.storyboard in Resources */,
+				4245568D26B0E61F001AF908 /* ShowDetails.storyboard in Resources */,
 				4288F27326AA4AD100E7DF1C /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,10 +274,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4245568B26B0DBE7001AF908 /* ShowDetailsViewController.swift in Sources */,
 				4288F27A26ACD5FC00E7DF1C /* Constants.swift in Sources */,
 				4288F27826ACD15800E7DF1C /* Users.swift in Sources */,
 				42333E5A26A3F61E00030DAB /* LoginViewController.swift in Sources */,
 				4245568726AFAF98001AF908 /* TVShowsTableViewCell.swift in Sources */,
+				4245569126B100DF001AF908 /* CommentCell.swift in Sources */,
+				4245568F26B0F9CF001AF908 /* MainShowDataCell.swift in Sources */,
 				429B4A6B26975F3F002C3B97 /* AppDelegate.swift in Sources */,
 				4245568326AF79CA001AF908 /* Shows.swift in Sources */,
 				4288F27526AA4B1000E7DF1C /* HomeViewController.swift in Sources */,
