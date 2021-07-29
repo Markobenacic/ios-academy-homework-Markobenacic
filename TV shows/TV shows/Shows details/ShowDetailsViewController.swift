@@ -12,6 +12,7 @@ import SVProgressHUD
 class ShowDetailsViewController: UIViewController {
 
     // MARK: - Properties
+    
     var authInfo: AuthInfo?
     var showID: String?
     var show: Show?
@@ -19,21 +20,42 @@ class ShowDetailsViewController: UIViewController {
     
     
     // MARK: - Outlets
+    
     @IBOutlet var showTableView: UITableView!
     @IBOutlet var writeReviewButton: UIButton!
     
-    // MARK: - Class methods
+    // MARK: - Lifecycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchReviews()
         setupUI()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func writeReviewButtonActionHandler(_sender: UIButton) {
+        presentWriteReview()
+    }
+    
+    // MARK: - Class methods
+    
     private func setupUI() {
         self.title = show?.title
         navigationController?.navigationBar.prefersLargeTitles = true
         setupWriteReviewButton()
         setupReviewsTableView()
+    }
+    
+    private func presentWriteReview() {
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "WriteReview", bundle: bundle)
+        let writeReviewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: WriteReviewViewController.self)
+        ) as! WriteReviewViewController
+        
+        let navigationController = UINavigationController(rootViewController: writeReviewController)
+        present(navigationController, animated: true)
     }
 }
 

@@ -34,10 +34,7 @@ class MainShowDataCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
-    private func setupUI() {
-        
-    }
+
 
 }
 
@@ -58,7 +55,10 @@ extension MainShowDataCell {
         //to write review or review(s) properly
         let multipleSuffix = numberOfReviews == 1 ? "" : "s"
         
-        reviewsAverageLabel.text = String(numberOfReviews) + " review" + multipleSuffix + ", " + String(average) + " average"
+        //round to 1 decimal point so it doesnt look ugly
+        let averageRoundedString = String(format: "%.1f", average)
+        
+        reviewsAverageLabel.text = String(numberOfReviews) + " review" + multipleSuffix + ", " + averageRoundedString + " average"
         
         star1ImageView.image = average < 0.5 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
         star2ImageView.image = average < 1.5 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")

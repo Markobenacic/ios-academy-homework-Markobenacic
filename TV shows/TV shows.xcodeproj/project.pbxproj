@@ -16,6 +16,9 @@
 		4245568F26B0F9CF001AF908 /* MainShowDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245568E26B0F9CF001AF908 /* MainShowDataCell.swift */; };
 		4245569126B100DF001AF908 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245569026B100DF001AF908 /* CommentCell.swift */; };
 		4245569326B19FEC001AF908 /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245569226B19FEC001AF908 /* Reviews.swift */; };
+		4245569526B26490001AF908 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245569426B26490001AF908 /* WriteReviewViewController.swift */; };
+		4245569926B269CF001AF908 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245569826B269CF001AF908 /* RatingView.swift */; };
+		4245569B26B26B2E001AF908 /* WriteReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4245569A26B26B2E001AF908 /* WriteReview.storyboard */; };
 		4288F27326AA4AD100E7DF1C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4288F27226AA4AD100E7DF1C /* Home.storyboard */; };
 		4288F27526AA4B1000E7DF1C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4288F27426AA4B1000E7DF1C /* HomeViewController.swift */; };
 		4288F27826ACD15800E7DF1C /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4288F27726ACD15800E7DF1C /* Users.swift */; };
@@ -36,6 +39,9 @@
 		4245568E26B0F9CF001AF908 /* MainShowDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShowDataCell.swift; sourceTree = "<group>"; };
 		4245569026B100DF001AF908 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		4245569226B19FEC001AF908 /* Reviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
+		4245569426B26490001AF908 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
+		4245569826B269CF001AF908 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		4245569A26B26B2E001AF908 /* WriteReview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteReview.storyboard; sourceTree = "<group>"; };
 		4288F27226AA4AD100E7DF1C /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		4288F27426AA4B1000E7DF1C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4288F27726ACD15800E7DF1C /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
@@ -85,6 +91,9 @@
 		4245568926B0D890001AF908 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				4245569826B269CF001AF908 /* RatingView.swift */,
+				4245569426B26490001AF908 /* WriteReviewViewController.swift */,
+				4245569A26B26B2E001AF908 /* WriteReview.storyboard */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -220,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4245569B26B26B2E001AF908 /* WriteReview.storyboard in Resources */,
 				429B4A7726975F41002C3B97 /* LaunchScreen.storyboard in Resources */,
 				429B4A7426975F41002C3B97 /* Assets.xcassets in Resources */,
 				42333E5726A3F35500030DAB /* Login.storyboard in Resources */,
@@ -279,10 +289,12 @@
 			files = (
 				4245568B26B0DBE7001AF908 /* ShowDetailsViewController.swift in Sources */,
 				4288F27A26ACD5FC00E7DF1C /* Constants.swift in Sources */,
+				4245569526B26490001AF908 /* WriteReviewViewController.swift in Sources */,
 				4288F27826ACD15800E7DF1C /* Users.swift in Sources */,
 				42333E5A26A3F61E00030DAB /* LoginViewController.swift in Sources */,
 				4245569326B19FEC001AF908 /* Reviews.swift in Sources */,
 				4245568726AFAF98001AF908 /* TVShowsTableViewCell.swift in Sources */,
+				4245569926B269CF001AF908 /* RatingView.swift in Sources */,
 				4245569126B100DF001AF908 /* CommentCell.swift in Sources */,
 				4245568F26B0F9CF001AF908 /* MainShowDataCell.swift in Sources */,
 				429B4A6B26975F3F002C3B97 /* AppDelegate.swift in Sources */,

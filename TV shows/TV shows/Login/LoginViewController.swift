@@ -274,6 +274,7 @@ private extension LoginViewController {
 // MARK: - Delegates
 
 extension LoginViewController: UITextFieldDelegate {
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if (emailTextField.hasText && passwordTextField.hasText) {
             loginButton.backgroundColor = .white

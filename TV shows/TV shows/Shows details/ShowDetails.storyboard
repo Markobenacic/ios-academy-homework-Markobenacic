@@ -24,7 +24,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="402" height="715"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainShowDataCell" id="KDi-f0-sgh" customClass="MainShowDataCell" customModule="TV_shows" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainShowDataCell" id="KDi-f0-sgh" customClass="MainShowDataCell" customModule="TV_shows" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="24.5" width="402" height="519"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KDi-f0-sgh" id="FfC-69-YZp">
@@ -106,7 +106,7 @@
                                                     <outlet property="star5ImageView" destination="H9e-s3-JtV" id="bJH-Rg-fS5"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" id="Esc-Fs-RfX" customClass="CommentCell" customModule="TV_shows" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" id="Esc-Fs-RfX" customClass="CommentCell" customModule="TV_shows" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="543.5" width="402" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Esc-Fs-RfX" id="as6-Vc-ORT">
@@ -202,6 +202,9 @@
                                         <state key="normal" title="Write a review">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="writeReviewButtonActionHandlerWith_sender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="fGh-P1-wG4"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
