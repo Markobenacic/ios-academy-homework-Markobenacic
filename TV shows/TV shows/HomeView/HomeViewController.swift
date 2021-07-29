@@ -63,7 +63,6 @@ private extension HomeViewController {
                 switch response.result {
                 case .success(let showsResponse):
                     SVProgressHUD.dismiss()
-                    print(showsResponse.shows.count)
                     self.showsResponse = showsResponse
                     self.showsTableView.reloadData()
                     print("fetching shows successful")

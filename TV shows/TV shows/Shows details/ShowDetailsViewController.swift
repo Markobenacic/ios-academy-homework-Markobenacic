@@ -61,10 +61,13 @@ class ShowDetailsViewController: UIViewController {
         writeReviewController.showID = showID
         writeReviewController.show = show
         
+        writeReviewController.onSubmit = { [weak self] in
+            self?.fetchReviews()
+        }
+        
         present(navigationController, animated: true)
     }
 }
-
 
 // MARK: - Private UI setup
 
@@ -161,6 +164,4 @@ extension ShowDetailsViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         }
     }
-    
-    
 }

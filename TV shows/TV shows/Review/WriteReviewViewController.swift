@@ -10,13 +10,15 @@ import SVProgressHUD
 import Alamofire
 
 class WriteReviewViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     var showID: String?
     var show: Show?
     var authInfo: AuthInfo?
     var user: User?
+    
+    var onSubmit: (() -> Void)?
     
     // MARK: - Outlets
     
@@ -34,12 +36,16 @@ class WriteReviewViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func submitButtonActionHandler(_ sender: UIButton) {
-        sendReview()
-        self.dismiss(animated: true)
+        
+        //In case of error, wont dismiss WriteReview view controller. Callback acts as some sort of delegate pattern. Is it alright to do like this?
+        sendReview(onSuccess: { [weak self] in
+            self?.onSubmit?()
+            self?.dismiss(animated: true)
+        })
     }
     
     // MARK: - Class methods
-
+    
     private func setupUI() {
         setupBackButton()
         title = "Write a review"
@@ -63,7 +69,7 @@ class WriteReviewViewController: UIViewController {
 
 private extension WriteReviewViewController {
     
-    func sendReview() {
+    func sendReview(onSuccess: @escaping () -> Void ) {
         SVProgressHUD.show()
         
         //mozda pukne tu kad dodam prazan komentar
@@ -77,14 +83,14 @@ private extension WriteReviewViewController {
         guard let authInfo = authInfo else {
             print("nema auth info")
             return }
-               
+        
         
         //mozda i tu pukne kod parameters
         let parameters: [String: String] = [
             "rating": String(ratingView.rating),
             "comment": comment,
             "show_id": String(showID)
-            ]
+        ]
         
         let url = Constants.Networking.baseURL + "/reviews"
         
@@ -105,7 +111,7 @@ private extension WriteReviewViewController {
                 case.success(let review):
                     SVProgressHUD.dismiss()
                     print("Review sent sucessfully")
-                    
+                    onSuccess()
                 case.failure(let error):
                     self.showAlertOfError(withStatus: "Network error", withMessage: "Oops, can't post your review")
                     SVProgressHUD.dismiss()
@@ -113,12 +119,6 @@ private extension WriteReviewViewController {
                 }
                 
             }
-            
-            
-            
-        
-        
-        
         
     }
 }
@@ -126,7 +126,7 @@ private extension WriteReviewViewController {
 //MARK: - ratingView Delegate
 
 extension WriteReviewViewController: RatingViewDelegate {
-  
+    
     func didChangeRating(_ rating: Int) {
         submitButton.isEnabled = true
         submitButton.backgroundColor = #colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1)
@@ -161,5 +161,5 @@ private extension WriteReviewViewController {
     @objc private func didSelectClose() {
         dismiss(animated: true, completion: nil)
     }
-
+    
 }
