@@ -131,6 +131,7 @@ extension HomeViewController: UITableViewDelegate {
         showDetailsViewController.authInfo = authInfo
         showDetailsViewController.showID = showsResponse?.shows[indexPath.row].id
         showDetailsViewController.show = showsResponse?.shows[indexPath.row]
+        showDetailsViewController.user = userResponse?.user
         
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }

@@ -17,7 +17,7 @@ class ShowDetailsViewController: UIViewController {
     var showID: String?
     var show: Show?
     var reviewResponse: ReviewResponse?
-    
+    var user: User?
     
     // MARK: - Outlets
     
@@ -55,9 +55,16 @@ class ShowDetailsViewController: UIViewController {
         ) as! WriteReviewViewController
         
         let navigationController = UINavigationController(rootViewController: writeReviewController)
+        
+        writeReviewController.authInfo = authInfo
+        writeReviewController.user = user
+        writeReviewController.showID = showID
+        writeReviewController.show = show
+        
         present(navigationController, animated: true)
     }
 }
+
 
 // MARK: - Private UI setup
 
@@ -80,13 +87,12 @@ private extension ShowDetailsViewController {
         else { return }
         
         let url = Constants.Networking.baseURL + "/shows/" + showID + "/reviews"
-        print(showID)
-        
         
         AF
             .request(
                 url,
                 method: .get,
+                parameters: ["page" : "1", "items" : "100"],
                 headers: HTTPHeaders(info.headers)
             )
             .validate()

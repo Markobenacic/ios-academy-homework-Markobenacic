@@ -23,6 +23,14 @@ struct Review: Decodable {
     }
 }
 
+struct WriteReviewResponse: Decodable {
+    let id: String?
+    let comment: String?
+    let rating: Int?
+    let show_id: Int?
+    let user: User?
+}
+
 struct Pagination: Decodable {
     let count: Int
     let page: Int
