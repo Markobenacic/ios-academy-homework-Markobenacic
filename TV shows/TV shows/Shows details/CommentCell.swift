@@ -57,14 +57,14 @@ extension CommentCell {
     func configure(with item: Review) {
         //missing: user image
         
-        self.rating = item.rating
+        rating = item.rating
         userEmailLabel.text = item.user.email
         descriptionLabel.text = item.comment
         
-        star1ImageView.image = item.rating <= 1 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
-        star2ImageView.image = item.rating <= 2 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
-        star3ImageView.image = item.rating <= 3 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
-        star4ImageView.image = item.rating <= 4 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
-        star5ImageView.image = item.rating <= 5 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
+        star1ImageView.image = item.rating >= 1 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
+        star2ImageView.image = item.rating >= 2 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
+        star3ImageView.image = item.rating >= 3 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
+        star4ImageView.image = item.rating >= 4 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
+        star5ImageView.image = item.rating >= 5 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
     }
 }

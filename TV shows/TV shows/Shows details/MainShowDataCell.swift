@@ -45,7 +45,6 @@ extension MainShowDataCell {
         descriptionLabel.text = show.description
         let numberOfReviews = reviews.count
         
-        // calc average, dumb way
         var sum = 0
         for review in reviews {
             sum += review.rating
@@ -60,11 +59,11 @@ extension MainShowDataCell {
         
         reviewsAverageLabel.text = String(numberOfReviews) + " review" + multipleSuffix + ", " + averageRoundedString + " average"
         
-        star1ImageView.image = average < 0.5 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
-        star2ImageView.image = average < 1.5 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
-        star3ImageView.image = average < 2.5 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
-        star4ImageView.image = average < 3.5 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
-        star5ImageView.image = average < 4.5 ? UIImage(named: "ic-star-deselected") : UIImage(named: "ic-star-selected")
+        star1ImageView.image = average >= 0.5 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
+        star2ImageView.image = average >= 1.5 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
+        star3ImageView.image = average >= 2.5 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
+        star4ImageView.image = average >= 3.5 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
+        star5ImageView.image = average >= 4.5 ? UIImage(named: "ic-star-selected") : UIImage(named: "ic-star-deselected")
         
     }
 
