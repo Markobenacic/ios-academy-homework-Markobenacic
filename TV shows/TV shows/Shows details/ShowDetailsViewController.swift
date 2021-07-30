@@ -159,6 +159,8 @@ extension ShowDetailsViewController: UITableViewDataSource, UITableViewDelegate 
             
             guard let reviewResponse = reviewResponse else { return cell }
             
+            // We are offseting our index by -1 because the first cell doesnt use individual reviews
+            // Is there a better way than writing a static number (-1) ? 
             cell.configure(with: reviewResponse.reviews[indexPath.row - 1])
             
             return cell

@@ -40,6 +40,7 @@ class MainShowDataCell: UITableViewCell {
 
 
 // MARK: - Configure
+
 extension MainShowDataCell {
     func configure(show: Show, reviews: [Review] ) {
         descriptionLabel.text = show.description

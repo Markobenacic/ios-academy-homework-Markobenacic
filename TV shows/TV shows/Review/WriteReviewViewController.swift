@@ -72,20 +72,11 @@ private extension WriteReviewViewController {
     func sendReview(onSuccess: @escaping () -> Void ) {
         SVProgressHUD.show()
         
-        //mozda pukne tu kad dodam prazan komentar
-        guard let comment = commentTextField.text else {
-            print("nema komentar")
-            return }
-        guard let showID = showID else {
-            print("nema showid")
-            return }
+        guard let comment = commentTextField.text,
+              let showID = showID,
+              let authInfo = authInfo
+              else { return }
         
-        guard let authInfo = authInfo else {
-            print("nema auth info")
-            return }
-        
-        
-        //mozda i tu pukne kod parameters
         let parameters: [String: String] = [
             "rating": String(ratingView.rating),
             "comment": comment,
