@@ -148,9 +148,15 @@
                     <connections>
                         <outlet property="checkBoxButton" destination="PAw-Zq-jIZ" id="NzR-5c-Fvg"/>
                         <outlet property="emailTextField" destination="kmL-MV-p8p" id="77s-ad-l4R"/>
+                        <outlet property="line1View" destination="J6U-sa-zEb" id="jfz-FA-l1N"/>
+                        <outlet property="line2View" destination="EAz-i0-pgc" id="veV-Q0-Pnb"/>
                         <outlet property="loginButton" destination="QQ2-n2-ydA" id="hG1-oV-sye"/>
                         <outlet property="passwordTextField" destination="z1W-2x-oks" id="Cji-qD-Gnk"/>
                         <outlet property="registerButton" destination="Cvz-eF-Yl8" id="kkf-tm-WJ2"/>
+                        <outlet property="rememberMeLabel" destination="qnb-Jh-3Nd" id="mNy-fP-5MI"/>
+                        <outlet property="showsImageView" destination="7R5-ot-lAT" id="IJ2-EI-eiM"/>
+                        <outlet property="subTitleLabel" destination="oxJ-B4-0EA" id="P3M-Hv-Z8b"/>
+                        <outlet property="titleLabel" destination="4jn-nm-3Bm" id="iBR-Xa-QcA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jke-r9-D43" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -20,6 +20,15 @@ class LoginViewController : UIViewController{
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
     
+    // for animations
+    @IBOutlet private weak var showsImageView: UIImageView!
+    @IBOutlet private weak var line1View: UIView!
+    @IBOutlet private weak var line2View: UIView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var subTitleLabel: UILabel!
+    @IBOutlet private weak var rememberMeLabel: UILabel!
+    
+    
     // MARK: - Properties
     
     private var passwordVisibilityButton: UIButton?
@@ -32,7 +41,8 @@ class LoginViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
+        prepareAnimations()
+        animateIntro()
     }
     
     // MARK: - Actions
@@ -83,6 +93,56 @@ class LoginViewController : UIViewController{
         
         navigationController?.pushViewController(homeViewController, animated: true)
     }
+}
+
+// MARK: - Animations
+
+private extension LoginViewController {
+    func prepareAnimations() {
+        UIView.animate(
+            withDuration: 0,
+            animations: {
+                self.showsImageView.transform = CGAffineTransform(translationX: -12, y: 290)
+                self.emailTextField.alpha = 0
+                self.passwordTextField.alpha = 0
+                self.titleLabel.alpha = 0
+                self.subTitleLabel.alpha = 0
+                self.line1View.alpha = 0
+                self.line2View.alpha = 0
+                self.checkBoxButton.alpha = 0
+                self.rememberMeLabel.alpha = 0
+                self.loginButton.alpha = 0
+                self.registerButton.alpha = 0
+            })
+    }
+    
+    func animateIntro() {
+        UIView.animate(
+            withDuration: 3.5,
+            delay: 0.5,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 0.0,
+            options: [.curveEaseInOut],
+            animations: {
+                self.showsImageView.transform = .identity
+        })
+        UIView.animate(
+            withDuration: 2,
+            delay: 3,
+            animations: {
+                self.emailTextField.alpha = 1
+                self.passwordTextField.alpha = 1
+                self.titleLabel.alpha = 1
+                self.subTitleLabel.alpha = 1
+                self.line1View.alpha = 1
+                self.line2View.alpha = 1
+                self.checkBoxButton.alpha = 1
+                self.rememberMeLabel.alpha = 1
+                self.loginButton.alpha = 1
+                self.registerButton.alpha = 1
+        })
+    }
+    
 }
 
 // MARK: - Login and register network calls
