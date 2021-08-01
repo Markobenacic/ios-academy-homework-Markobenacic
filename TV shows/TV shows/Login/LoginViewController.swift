@@ -115,7 +115,7 @@ private extension LoginViewController {
         self.registerButton.alpha = 0
         
         UIView.animate(
-            withDuration: 3.5,
+            withDuration: 3.0,
             delay: 0.5,
             usingSpringWithDamping: 0.7,
             initialSpringVelocity: 0.0,
@@ -125,8 +125,8 @@ private extension LoginViewController {
         })
         
         UIView.animate(
-            withDuration: 2,
-            delay: 3,
+            withDuration: 1.5,
+            delay: 2.5,
             animations: {
                 self.emailTextField.alpha = 1
                 self.passwordTextField.alpha = 1
@@ -139,6 +139,70 @@ private extension LoginViewController {
                 self.loginButton.alpha = 1
                 self.registerButton.alpha = 1
         })
+    }
+    
+    func animateLoginError() {
+        
+        // This way of animating this seems a bit cleaner than the one commented below, since the latter uses a lot of nested completed: closures. Didn't delete it because I'm interested which way is better.
+        let animationEmail = CABasicAnimation(keyPath: "position")
+        animationEmail.duration = 0.08
+        animationEmail.repeatCount = 2
+        animationEmail.autoreverses = true
+        animationEmail.fromValue = NSValue(
+            cgPoint: CGPoint(
+                x: emailTextField.center.x - 5,
+                y: emailTextField.center.y))
+        animationEmail.toValue = NSValue(
+            cgPoint: CGPoint(
+                x: emailTextField.center.x + 5,
+                y: emailTextField.center.y))
+        
+        let animationPassword = CABasicAnimation(keyPath: "position")
+        animationPassword.duration = 0.08
+        animationPassword.repeatCount = 2
+        animationPassword.autoreverses = true
+        animationPassword.fromValue = NSValue(
+            cgPoint: CGPoint(
+                x: passwordTextField.textInputView.center.x - 5,
+                y: passwordTextField.textInputView.center.y))
+        animationPassword.toValue = NSValue(
+            cgPoint: CGPoint(
+                x: passwordTextField.textInputView.center.x + 5,
+                y: passwordTextField.textInputView.center.y))
+        
+        emailTextField.layer.add(animationEmail, forKey: "position")
+        // Used textInputView here because I don't want to shake the eye thingy.
+        passwordTextField.textInputView.layer.add(animationPassword, forKey: "position")
+        
+        
+//        UIView.animate(
+//            withDuration: 0.05,
+//            animations: {
+//                self.emailTextField.transform = CGAffineTransform(translationX: 5.0, y: 0.0)
+//                self.passwordTextField.textInputView.transform = CGAffineTransform(translationX: 5.0, y: 0.0)
+//            },
+//            completion: {_ in
+//                UIView.animate(withDuration: 0.1, animations: {
+//                    self.emailTextField.transform = CGAffineTransform(translationX: -5.0, y: 0.0)
+//                    self.passwordTextField.textInputView.transform = CGAffineTransform(translationX: -5.0, y: 0.0)
+//                },
+//                completion: {_ in
+//                    UIView.animate(withDuration: 0.1, animations: {
+//                        self.emailTextField.transform = CGAffineTransform(translationX: 5.0, y: 0.0)
+//                        self.passwordTextField.textInputView.transform = CGAffineTransform(translationX: 5.0, y: 0.0)
+//                    },
+//                    completion: {_ in
+//                        UIView.animate(withDuration: 0.05, animations: {
+//                            self.emailTextField.transform = .identity
+//                            self.passwordTextField.textInputView.transform = .identity
+//                        }
+//                        )
+//                    }
+//                    )
+//                }
+//                )
+//            }
+//        )
     }
     
 }
@@ -176,10 +240,8 @@ private extension LoginViewController {
                     self.handleSuccessfulLoginOrRegister(for: userResponse.user, headers: headers)
                     print("Sign in successful")
                 case .failure(let error):
-                    
-                    // Should I put "invalid email or password" message here? Should I include cases for both serverside errors and invalid credentials? If invalid credentials are presented by 401 response, how is "can't access the server" presented?
-                    self.showAlertOfError(withStatus: "Login error", withMessage: "Oops, something went wrong")
                     SVProgressHUD.dismiss()
+                    self.animateLoginError()
                     print(error)
                 }
             }
