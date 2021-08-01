@@ -6,17 +6,20 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TVShowsTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
     
     @IBOutlet var showNameLabel: UILabel!
+    @IBOutlet var showImageView: UIImageView!
     
     // MARK: - Lifecycle methods
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        showImageView.layer.cornerRadius = 8.0
         // Initialization code
     }
     
@@ -34,5 +37,9 @@ extension TVShowsTableViewCell {
     
     func configure(with item: Show) {
         showNameLabel.text = item.title
+        showImageView.kf.setImage(
+            with: item.imageUrl,
+            placeholder: UIImage(named: "ic-show-placeholder-rectangle"))
+        
     }
 }

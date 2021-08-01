@@ -102,17 +102,17 @@ private extension LoginViewController {
     // Either way I understand those decisions are UX designers' to make, but its fun to think about :D
     func animateIntro() {
         
-        self.showsImageView.transform = CGAffineTransform(translationX: -12, y: 289)
-        self.emailTextField.alpha = 0
-        self.passwordTextField.alpha = 0
-        self.titleLabel.alpha = 0
-        self.subTitleLabel.alpha = 0
-        self.line1View.alpha = 0
-        self.line2View.alpha = 0
-        self.checkBoxButton.alpha = 0
-        self.rememberMeLabel.alpha = 0
-        self.loginButton.alpha = 0
-        self.registerButton.alpha = 0
+        showsImageView.transform = CGAffineTransform(translationX: -12, y: 289)
+        emailTextField.alpha = 0
+        passwordTextField.alpha = 0
+        titleLabel.alpha = 0
+        subTitleLabel.alpha = 0
+        line1View.alpha = 0
+        line2View.alpha = 0
+        checkBoxButton.alpha = 0
+        rememberMeLabel.alpha = 0
+        loginButton.alpha = 0
+        registerButton.alpha = 0
         
         UIView.animate(
             withDuration: 3.0,

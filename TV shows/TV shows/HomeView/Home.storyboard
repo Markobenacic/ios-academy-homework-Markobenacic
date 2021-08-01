@@ -22,27 +22,40 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TVShowsTableViewCell" id="2Mq-H0-gOr" customClass="TVShowsTableViewCell" customModule="TV_shows" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="53.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="136.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Mq-H0-gOr" id="iMS-Ua-4b9">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="53.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="136.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FA-YO-PgR">
-                                                    <rect key="frame" x="16" y="16" width="382" height="21.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FTw-No-HjV">
+                                                    <rect key="frame" x="8" y="8" width="398" height="120.5"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="ic-show-placeholder-rectangle" translatesAutoresizingMaskIntoConstraints="NO" id="Khj-O3-jZV">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="120.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="80" id="MSm-M7-TNT"/>
+                                                                <constraint firstAttribute="height" constant="120" id="YaV-Uh-LvC"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FA-YO-PgR">
+                                                            <rect key="frame" x="96" y="0.0" width="302" height="120.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="8FA-YO-PgR" firstAttribute="top" secondItem="iMS-Ua-4b9" secondAttribute="top" constant="16" id="2fr-sa-n52"/>
-                                                <constraint firstAttribute="bottom" secondItem="8FA-YO-PgR" secondAttribute="bottom" constant="16" id="D66-1U-M9j"/>
-                                                <constraint firstAttribute="trailing" secondItem="8FA-YO-PgR" secondAttribute="trailing" constant="16" id="c55-Wm-7kY"/>
-                                                <constraint firstItem="8FA-YO-PgR" firstAttribute="leading" secondItem="iMS-Ua-4b9" secondAttribute="leading" constant="16" id="vCb-83-CWd"/>
+                                                <constraint firstAttribute="trailing" secondItem="FTw-No-HjV" secondAttribute="trailing" constant="8" id="N2g-7Q-qV4"/>
+                                                <constraint firstAttribute="bottom" secondItem="FTw-No-HjV" secondAttribute="bottom" constant="8" id="b0r-FO-lfb"/>
+                                                <constraint firstItem="FTw-No-HjV" firstAttribute="top" secondItem="iMS-Ua-4b9" secondAttribute="top" constant="8" id="eHD-ek-QrF"/>
+                                                <constraint firstItem="FTw-No-HjV" firstAttribute="leading" secondItem="iMS-Ua-4b9" secondAttribute="leading" constant="8" id="r4F-Uk-2dZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="showImageView" destination="Khj-O3-jZV" id="DyX-oU-lYy"/>
                                             <outlet property="showNameLabel" destination="8FA-YO-PgR" id="B1B-1K-U35"/>
                                         </connections>
                                     </tableViewCell>
@@ -68,6 +81,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic-show-placeholder-rectangle" width="350" height="350"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
