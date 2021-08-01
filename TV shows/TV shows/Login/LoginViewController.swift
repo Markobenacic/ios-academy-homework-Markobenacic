@@ -41,7 +41,6 @@ class LoginViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        prepareAnimations()
         animateIntro()
     }
     
@@ -97,26 +96,24 @@ class LoginViewController : UIViewController{
 
 // MARK: - Animations
 
+
 private extension LoginViewController {
-    func prepareAnimations() {
-        UIView.animate(
-            withDuration: 0,
-            animations: {
-                self.showsImageView.transform = CGAffineTransform(translationX: -12, y: 290)
-                self.emailTextField.alpha = 0
-                self.passwordTextField.alpha = 0
-                self.titleLabel.alpha = 0
-                self.subTitleLabel.alpha = 0
-                self.line1View.alpha = 0
-                self.line2View.alpha = 0
-                self.checkBoxButton.alpha = 0
-                self.rememberMeLabel.alpha = 0
-                self.loginButton.alpha = 0
-                self.registerButton.alpha = 0
-            })
-    }
-    
+    // Would this kind of animation make the user experience worse, since they're waiting extra 4 seconds for animations to finish? I would imagine it would. And also app users are impatient.
+    // Either way I understand those decisions are UX designers' to make, but its fun to think about :D
     func animateIntro() {
+        
+        self.showsImageView.transform = CGAffineTransform(translationX: -12, y: 289)
+        self.emailTextField.alpha = 0
+        self.passwordTextField.alpha = 0
+        self.titleLabel.alpha = 0
+        self.subTitleLabel.alpha = 0
+        self.line1View.alpha = 0
+        self.line2View.alpha = 0
+        self.checkBoxButton.alpha = 0
+        self.rememberMeLabel.alpha = 0
+        self.loginButton.alpha = 0
+        self.registerButton.alpha = 0
+        
         UIView.animate(
             withDuration: 3.5,
             delay: 0.5,
@@ -126,6 +123,7 @@ private extension LoginViewController {
             animations: {
                 self.showsImageView.transform = .identity
         })
+        
         UIView.animate(
             withDuration: 2,
             delay: 3,
