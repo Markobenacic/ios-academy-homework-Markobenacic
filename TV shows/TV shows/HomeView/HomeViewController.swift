@@ -18,14 +18,12 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     
     var authInfo: AuthInfo?
-    var userResponse: UserResponse?
     private var showsResponse: ShowsResponse?
     
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setViewControllers([self], animated: true)
         fetchShows()
         setupUI()
     }
@@ -130,7 +128,6 @@ extension HomeViewController: UITableViewDelegate {
         showDetailsViewController.authInfo = authInfo
         showDetailsViewController.showID = showsResponse?.shows[indexPath.row].id
         showDetailsViewController.show = showsResponse?.shows[indexPath.row]
-        showDetailsViewController.user = userResponse?.user
         
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }

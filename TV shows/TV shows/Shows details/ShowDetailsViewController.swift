@@ -57,7 +57,6 @@ class ShowDetailsViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: writeReviewController)
         
         writeReviewController.authInfo = authInfo
-        writeReviewController.user = user
         writeReviewController.showID = showID
         writeReviewController.show = show
         

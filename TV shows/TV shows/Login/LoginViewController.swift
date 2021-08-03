@@ -88,9 +88,11 @@ class LoginViewController : UIViewController{
             withIdentifier: "HomeViewController"
         ) as! HomeViewController
         homeViewController.authInfo = authInfo
-        homeViewController.userResponse = userResponse
         
-        navigationController?.pushViewController(homeViewController, animated: true)
+        
+  //      navigationController?.pushViewController(homeViewController, animated: true)
+        
+        navigationController?.setViewControllers([homeViewController], animated: true)
     }
 }
 
@@ -299,7 +301,15 @@ private extension LoginViewController {
             return
         }
         self.authInfo = authInfo
-        self.pushHomeView()
+        
+        if checkBoxButton.isSelected {
+            let encoder = PropertyListEncoder()
+            if let encoded = try? encoder.encode(authInfo) {
+                UserDefaults.standard.set(encoded, forKey: Constants.Keys.authInfo)
+            }
+        }
+        
+        pushHomeView()
     }
 }
 

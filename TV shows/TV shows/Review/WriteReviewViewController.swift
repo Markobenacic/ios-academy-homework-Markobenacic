@@ -16,7 +16,6 @@ class WriteReviewViewController: UIViewController {
     var showID: String?
     var show: Show?
     var authInfo: AuthInfo?
-    var user: User?
     
     var onSubmit: (() -> Void)?
     

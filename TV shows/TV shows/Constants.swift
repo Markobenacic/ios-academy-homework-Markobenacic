@@ -13,4 +13,7 @@ struct Constants {
         static let baseURL = "https://tv-shows.infinum.academy"
     }
     
+    enum Keys {
+        static let authInfo = "authInfo"
+    }
 }
