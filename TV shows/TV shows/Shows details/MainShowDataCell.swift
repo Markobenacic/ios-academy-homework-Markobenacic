@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MainShowDataCell: UITableViewCell {
 
@@ -42,7 +43,11 @@ class MainShowDataCell: UITableViewCell {
 // MARK: - Configure
 
 extension MainShowDataCell {
-    func configure(show: Show, reviews: [Review] ) {
+    func configure(show: Show, reviews: [Review], showImageUrl: URL? ) {
+        
+        showImageView?.kf.setImage(with: showImageUrl)
+        showImageView.layer.cornerRadius = 10.0
+        
         descriptionLabel.text = show.description
         let numberOfReviews = reviews.count
         

@@ -25,41 +25,41 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainShowDataCell" id="KDi-f0-sgh" customClass="MainShowDataCell" customModule="TV_shows" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="402" height="519"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="402" height="714"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KDi-f0-sgh" id="FfC-69-YZp">
-                                                    <rect key="frame" x="0.0" y="0.0" width="402" height="519"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="402" height="714"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="DRO-Hp-GSK">
-                                                            <rect key="frame" x="6" y="6" width="390" height="507"/>
+                                                            <rect key="frame" x="6" y="6" width="390" height="702"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TheOffice-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Xnf-tF-Vuw">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="390"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TheOffice-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Xnf-tF-Vuw">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="585"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="Xnf-tF-Vuw" secondAttribute="height" id="hw9-ns-lLx"/>
+                                                                        <constraint firstAttribute="width" secondItem="Xnf-tF-Vuw" secondAttribute="height" multiplier="80:120" id="jb7-kg-9eZ"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUU-Ni-8U9">
-                                                                    <rect key="frame" x="0.0" y="396" width="390" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="591" width="390" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEc-Id-4lz">
-                                                                    <rect key="frame" x="0.0" y="423" width="390" height="24"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEc-Id-4lz">
+                                                                    <rect key="frame" x="0.0" y="618" width="390" height="24"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Reviews, 4.7 Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbs-Be-BuR">
-                                                                    <rect key="frame" x="0.0" y="453" width="390" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="3 Reviews, 4.7 Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbs-Be-BuR">
+                                                                    <rect key="frame" x="0.0" y="648" width="390" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3t-U4-FRF">
-                                                                    <rect key="frame" x="0.0" y="477" width="390" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="672" width="390" height="30"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-star-selected" translatesAutoresizingMaskIntoConstraints="NO" id="IdR-Yr-JCy">
                                                                             <rect key="frame" x="0.0" y="0.0" width="24" height="30"/>
@@ -107,7 +107,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" id="Esc-Fs-RfX" customClass="CommentCell" customModule="TV_shows" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="543.5" width="402" height="93"/>
+                                                <rect key="frame" x="0.0" y="738.5" width="402" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Esc-Fs-RfX" id="as6-Vc-ORT">
                                                     <rect key="frame" x="0.0" y="0.0" width="402" height="93"/>

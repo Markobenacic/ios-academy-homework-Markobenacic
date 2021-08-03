@@ -18,6 +18,7 @@ class ShowDetailsViewController: UIViewController {
     var show: Show?
     var reviewResponse: ReviewResponse?
     var user: User?
+    var showImageUrl: URL?
     
     // MARK: - Outlets
     
@@ -147,7 +148,7 @@ extension ShowDetailsViewController: UITableViewDataSource, UITableViewDelegate 
                   let show = show
             else { return cell }
             
-            cell.configure(show: show, reviews: reviewResponse.reviews)
+            cell.configure(show: show, reviews: reviewResponse.reviews, showImageUrl: showImageUrl)
             
             return cell
         } else {

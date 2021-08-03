@@ -128,6 +128,7 @@ extension HomeViewController: UITableViewDelegate {
         showDetailsViewController.authInfo = authInfo
         showDetailsViewController.showID = showsResponse?.shows[indexPath.row].id
         showDetailsViewController.show = showsResponse?.shows[indexPath.row]
+        showDetailsViewController.showImageUrl = showsResponse?.shows[indexPath.row].imageUrl
         
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }
