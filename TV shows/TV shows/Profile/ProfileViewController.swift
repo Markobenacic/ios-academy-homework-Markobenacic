@@ -63,7 +63,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            profileImage.contentMode = .scaleAspectFit
+     //       profileImage.contentMode = .scaleAspectFit
             
             uploadImage(image: pickedImage)
             
@@ -119,8 +119,8 @@ private extension ProfileViewController {
     func uploadImage(image: UIImage) {
         guard let imageData = image.jpegData(compressionQuality: 0.9),
               let authInfo = self.authInfo
-                
         else { return }
+        
         let requestData = MultipartFormData()
         requestData.append(
             imageData,
@@ -129,12 +129,13 @@ private extension ProfileViewController {
             mimeType: "image/jpg"
         )
         
+        
         AF
             .upload(
                 multipartFormData: requestData,
                 to: Constants.Networking.baseURL + "/users",
-                method: .put,
-                headers: HTTPHeaders(authInfo.headers)
+                method: .put
+           //     headers: HTTPHeaders(authInfo.headers)
                 )
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] response in
@@ -150,6 +151,7 @@ private extension ProfileViewController {
                 }
                 
             }
+        
     }
     
     // Should probably save the user in a singleton, so this method doesn't have to fetch user every time this viewcontroller is presented
