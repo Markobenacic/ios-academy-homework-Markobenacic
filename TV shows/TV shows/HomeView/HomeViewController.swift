@@ -32,6 +32,7 @@ class HomeViewController: UIViewController {
     
     private func setupUI() {
         self.title = "Shows"
+        setupProfileButton()
         setupShowsTableView()
     }
     
@@ -75,6 +76,35 @@ private extension HomeViewController {
 // MARK: - Private UI setup
 
 private extension HomeViewController {
+    
+    func setupProfileButton() {
+        let profileDetailsItem = UIBarButtonItem(
+            image: UIImage(named: "ic-profile"),
+            style: .plain,
+            target: self,
+            action: #selector(profileDetailsActionHandler)
+        )
+        profileDetailsItem.tintColor = #colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1)
+        navigationItem.rightBarButtonItem = profileDetailsItem
+        
+    }
+    
+    @objc
+    func profileDetailsActionHandler() {
+        
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Profile", bundle: bundle)
+        
+        let profileViewController = storyboard.instantiateViewController(
+            withIdentifier: String(describing: ProfileViewController.self)
+        ) as! ProfileViewController
+        
+        let navigationController = UINavigationController(rootViewController: profileViewController)
+        
+        profileViewController.authInfo = authInfo
+        
+        present(navigationController, animated: true)
+    }
     
     func setupShowsTableView() {
         showsTableView.dataSource = self
