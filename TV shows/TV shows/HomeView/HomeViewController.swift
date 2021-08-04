@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     
     var authInfo: AuthInfo?
     var userResponse: UserResponse?
-    private var showsResponse: ShowsResponse?
+    private var shows: [Show] = []
     
     // MARK: - Lifecycle methods
     
@@ -63,7 +63,7 @@ private extension HomeViewController {
                 switch response.result {
                 case .success(let showsResponse):
                     SVProgressHUD.dismiss()
-                    self.showsResponse = showsResponse
+                    self.shows = showsResponse.shows
                     self.showsTableView.reloadData()
                     print("fetching shows successful")
                 case .failure(let error):
@@ -93,10 +93,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        // is it okay to return 0 here if showsResponse is nil
-        guard let showsResponse = showsResponse else { return 0 }
-        return showsResponse.shows.count
+        return shows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,11 +102,7 @@ extension HomeViewController: UITableViewDataSource {
             withIdentifier: String(describing: TVShowsTableViewCell.self),
             for: indexPath
         ) as! TVShowsTableViewCell
-        
-        // is it good practice to unpack showsResponse every time I use it in various methods?
-        guard let showsResponse = showsResponse else { return cell }
-        cell.configure(with: showsResponse.shows[indexPath.row])
-        
+        cell.configure(with: shows[indexPath.row])
         return cell
     }
 }
@@ -128,8 +121,7 @@ extension HomeViewController: UITableViewDelegate {
         ) as! ShowDetailsViewController
         
         showDetailsViewController.authInfo = authInfo
-        showDetailsViewController.showID = showsResponse?.shows[indexPath.row].id
-        showDetailsViewController.show = showsResponse?.shows[indexPath.row]
+        showDetailsViewController.show = shows[indexPath.row]
         showDetailsViewController.user = userResponse?.user
         
         navigationController?.pushViewController(showDetailsViewController, animated: true)

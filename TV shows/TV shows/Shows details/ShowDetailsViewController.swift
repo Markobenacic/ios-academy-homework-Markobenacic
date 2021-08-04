@@ -14,15 +14,14 @@ class ShowDetailsViewController: UIViewController {
     // MARK: - Properties
     
     var authInfo: AuthInfo?
-    var showID: String?
     var show: Show?
     var reviewResponse: ReviewResponse?
     var user: User?
     
     // MARK: - Outlets
     
-    @IBOutlet var showTableView: UITableView!
-    @IBOutlet var writeReviewButton: UIButton!
+    @IBOutlet private var showTableView: UITableView!
+    @IBOutlet private var writeReviewButton: UIButton!
     
     // MARK: - Lifecycle methods
     
@@ -58,7 +57,6 @@ class ShowDetailsViewController: UIViewController {
         
         writeReviewController.authInfo = authInfo
         writeReviewController.user = user
-        writeReviewController.showID = showID
         writeReviewController.show = show
         
         writeReviewController.onSubmit = { [weak self] in
@@ -85,11 +83,11 @@ private extension ShowDetailsViewController {
     func fetchReviews() {
         SVProgressHUD.show()
         
-        guard let showID = showID,
+        guard let show = show,
               let info = authInfo
         else { return }
         
-        let url = Constants.Networking.baseURL + "/shows/" + showID + "/reviews"
+        let url = Constants.Networking.baseURL + "/shows/" + show.id + "/reviews"
         
         AF
             .request(

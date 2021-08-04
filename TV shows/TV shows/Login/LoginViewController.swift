@@ -79,7 +79,7 @@ class LoginViewController : UIViewController{
             withIdentifier: "HomeViewController"
         ) as! HomeViewController
         homeViewController.authInfo = authInfo
-        homeViewController.userResponse = userResponse
+        
         
         navigationController?.pushViewController(homeViewController, animated: true)
     }
@@ -179,7 +179,7 @@ private extension LoginViewController {
             return
         }
         self.authInfo = authInfo
-        self.pushHomeView()
+        pushHomeView()
     }
 }
 
