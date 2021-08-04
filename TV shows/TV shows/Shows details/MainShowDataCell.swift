@@ -21,24 +21,12 @@ class MainShowDataCell: UITableViewCell {
     @IBOutlet var star4ImageView: UIImageView!
     @IBOutlet var star5ImageView: UIImageView!
     
-    // MARK: - Lifecycle methods
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
     // MARK: - Class methods
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
-
 }
-
 
 // MARK: - Configure
 
@@ -51,16 +39,14 @@ extension MainShowDataCell {
         descriptionLabel.text = show.description
         let numberOfReviews = reviews.count
         
-        var sum = 0
-        for review in reviews {
-            sum += review.rating
-        }
+        let sum = reviews.map{ $0.rating }.reduce(0){ $0 + $1 }
+        
         let average = Double(sum) / Double(numberOfReviews)
         
-        //to write review or review(s) properly
+        // to write review or review(s) properly
         let multipleSuffix = numberOfReviews == 1 ? "" : "s"
         
-        //round to 1 decimal point so it doesnt look ugly
+        // round to 1 decimal point so it doesnt look ugly
         let averageRoundedString = String(format: "%.1f", average)
         
         reviewsAverageLabel.text = String(numberOfReviews) + " review" + multipleSuffix + ", " + averageRoundedString + " average"

@@ -94,10 +94,6 @@ class LoginViewController : UIViewController{
             withIdentifier: "HomeViewController"
         ) as! HomeViewController
         homeViewController.authInfo = authInfo
-        
-        
-  //      navigationController?.pushViewController(homeViewController, animated: true)
-        
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
 }

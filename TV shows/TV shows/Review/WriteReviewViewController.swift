@@ -13,7 +13,6 @@ class WriteReviewViewController: UIViewController {
     
     // MARK: - Properties
     
-    var showID: String?
     var show: Show?
     var authInfo: AuthInfo?
     
@@ -32,11 +31,11 @@ class WriteReviewViewController: UIViewController {
         setupUI()
     }
     
-    //MARK: - Actions
+    // MARK: - Actions
     
     @IBAction func submitButtonActionHandler(_ sender: UIButton) {
         
-        //In case of error, wont dismiss WriteReview view controller. Callback acts as some sort of delegate pattern. Is it alright to do like this?
+        // In case of error, wont dismiss WriteReview view controller. Callback acts as some sort of delegate pattern. Is it alright to do like this?
         sendReview(onSuccess: { [weak self] in
             self?.onSubmit?()
             self?.dismiss(animated: true)
@@ -72,14 +71,14 @@ private extension WriteReviewViewController {
         SVProgressHUD.show()
         
         guard let comment = commentTextField.text,
-              let showID = showID,
+              let show = show,
               let authInfo = authInfo
               else { return }
         
         let parameters: [String: String] = [
             "rating": String(ratingView.rating),
             "comment": comment,
-            "show_id": String(showID)
+            "show_id": String(show.id)
         ]
         
         let url = Constants.Networking.baseURL + "/reviews"
