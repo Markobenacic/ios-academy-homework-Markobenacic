@@ -45,7 +45,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gov-J3-nAB">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gov-J3-nAB" customClass="AnimatedButton" customModule="TV_shows" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="364" width="382" height="50"/>
                                         <color key="backgroundColor" red="0.29238869039999998" green="0.1769155348" blue="0.51426571659999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>

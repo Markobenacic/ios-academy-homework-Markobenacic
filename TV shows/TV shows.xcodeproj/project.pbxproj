@@ -28,6 +28,7 @@
 		429B4A7726975F41002C3B97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 429B4A7526975F41002C3B97 /* LaunchScreen.storyboard */; };
 		42BEFBDF26BA214500928834 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42BEFBDE26BA214500928834 /* Profile.storyboard */; };
 		42BEFBE126BA21BA00928834 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BEFBE026BA21BA00928834 /* ProfileViewController.swift */; };
+		42BEFBE426BA613200928834 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BEFBE326BA613200928834 /* AnimatedButton.swift */; };
 		58F37D8E4A66B6352FD04EC5 /* Pods_TV_shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4287CDDFDCD42B615E25BD0 /* Pods_TV_shows.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		429B4A7826975F41002C3B97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42BEFBDE26BA214500928834 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		42BEFBE026BA21BA00928834 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		42BEFBE326BA613200928834 /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		A4287CDDFDCD42B615E25BD0 /* Pods_TV_shows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_shows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B92945296605832BF1EDC4F0 /* Pods-TV shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV shows.debug.xcconfig"; path = "Target Support Files/Pods-TV shows/Pods-TV shows.debug.xcconfig"; sourceTree = "<group>"; };
 		D99BBF65CC1C07E15498E4CB /* Pods-TV shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV shows.release.xcconfig"; path = "Target Support Files/Pods-TV shows/Pods-TV shows.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		429B4A6926975F3F002C3B97 /* TV shows */ = {
 			isa = PBXGroup;
 			children = (
+				42BEFBE226BA610100928834 /* Animations */,
 				42BEFBDD26BA212300928834 /* Profile */,
 				4245568926B0D890001AF908 /* Review */,
 				4245568826B0D7B8001AF908 /* Shows details */,
@@ -165,6 +168,14 @@
 				42BEFBE026BA21BA00928834 /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		42BEFBE226BA610100928834 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				42BEFBE326BA613200928834 /* AnimatedButton.swift */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		AF071E30D7F4F21EC9D12F69 /* Frameworks */ = {
@@ -315,6 +326,7 @@
 				4245568F26B0F9CF001AF908 /* MainShowDataCell.swift in Sources */,
 				429B4A6B26975F3F002C3B97 /* AppDelegate.swift in Sources */,
 				4245568326AF79CA001AF908 /* Shows.swift in Sources */,
+				42BEFBE426BA613200928834 /* AnimatedButton.swift in Sources */,
 				4288F27526AA4B1000E7DF1C /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

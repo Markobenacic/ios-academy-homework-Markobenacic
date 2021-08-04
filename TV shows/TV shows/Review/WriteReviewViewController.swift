@@ -21,7 +21,7 @@ class WriteReviewViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet var submitButton: UIButton!
+    @IBOutlet var submitButton: AnimatedButton!
     @IBOutlet var commentTextField: UITextField!
     @IBOutlet var ratingView: RatingView!
     

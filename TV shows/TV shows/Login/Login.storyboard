@@ -67,7 +67,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQ2-n2-ydA">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQ2-n2-ydA" customClass="AnimatedButton" customModule="TV_shows" customModuleProvider="target">
                                 <rect key="frame" x="20" y="494" width="374" height="46"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -81,7 +81,7 @@
                                     <action selector="loginButtonActionHandler:" destination="DMs-Bj-Lmw" eventType="touchUpInside" id="9ol-ld-zYe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvz-eF-Yl8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvz-eF-Yl8" customClass="AnimatedButton" customModule="TV_shows" customModuleProvider="target">
                                 <rect key="frame" x="20" y="552" width="374" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="IEh-S7-lVa"/>

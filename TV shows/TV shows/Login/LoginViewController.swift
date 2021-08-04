@@ -17,8 +17,8 @@ class LoginViewController : UIViewController{
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var checkBoxButton: UIButton!
-    @IBOutlet private weak var loginButton: UIButton!
-    @IBOutlet private weak var registerButton: UIButton!
+    @IBOutlet private weak var loginButton: AnimatedButton!
+    @IBOutlet private weak var registerButton: AnimatedButton!
     
     // for animations
     @IBOutlet private weak var showsImageView: UIImageView!
@@ -46,7 +46,8 @@ class LoginViewController : UIViewController{
     
     // MARK: - Actions
     
-    @IBAction func loginButtonActionHandler(_ sender: Any) {
+    @IBAction func loginButtonActionHandler(_ sender: AnimatedButton) {
+                
         guard
             let email = emailTextField.text,
             let password = passwordTextField.text,
@@ -59,7 +60,7 @@ class LoginViewController : UIViewController{
         loginUser(email: email, password: password)
     }
     
-    @IBAction func registerButtonActionHandler(_ sender: Any) {
+    @IBAction func registerButtonActionHandler(_ sender: AnimatedButton) {
         guard
             let email = emailTextField.text,
             let password = passwordTextField.text,
@@ -100,6 +101,8 @@ class LoginViewController : UIViewController{
 
 
 private extension LoginViewController {
+    
+    
     // Would this kind of animation make the user experience worse, since they're waiting extra 4 seconds for animations to finish? I would imagine it would. And also app users are impatient.
     // Either way I understand those decisions are UX designers' to make, but its fun to think about :D
     func animateIntro() {
