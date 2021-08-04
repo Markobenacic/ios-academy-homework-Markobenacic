@@ -44,6 +44,11 @@ class LoginViewController : UIViewController{
         animateIntro()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     // MARK: - Actions
     
     @IBAction func loginButtonActionHandler(_ sender: AnimatedButton) {

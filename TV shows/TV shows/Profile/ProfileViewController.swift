@@ -134,8 +134,8 @@ private extension ProfileViewController {
             .upload(
                 multipartFormData: requestData,
                 to: Constants.Networking.baseURL + "/users",
-                method: .put
-           //     headers: HTTPHeaders(authInfo.headers)
+                method: .put,
+                headers: HTTPHeaders(authInfo.headers)
                 )
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] response in
@@ -144,7 +144,7 @@ private extension ProfileViewController {
                 switch response.result {
                 case .success(let userResponse):
                     self.user = userResponse.user
-                    print(self.user?.email as Any)
+                    self.setupProfileImage()
                 case .failure(let error):
                     print("zugzug")
                     print(error.errorDescription as Any)
@@ -177,6 +177,7 @@ private extension ProfileViewController {
                     SVProgressHUD.dismiss()
                     self.user = userResponse.user
                     self.emailLabel.text = self.user?.email
+                    self.setupProfileImage()
                 case .failure(let error):
                     print(error)
                     SVProgressHUD.showError(withStatus: "Network error: can't load user")

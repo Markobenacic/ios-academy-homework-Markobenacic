@@ -31,6 +31,9 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="ic-profile-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="BWy-op-tYp">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="226.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="Lj8-Ga-SqW"/>
+                                                </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAM-am-qRO">
                                                 <rect key="frame" x="150" y="0.0" width="236" height="226.5"/>
