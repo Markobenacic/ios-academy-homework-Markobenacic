@@ -2,7 +2,7 @@
 //  User.swift
 //  TV shows
 //
-//  Created by infinum on 25.07.2021..
+//  Created by Marko Benacic on 25.07.2021..
 //
 
 import Foundation
